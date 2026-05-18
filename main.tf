@@ -81,17 +81,5 @@ module "ec2_instance" {
       ip_protocol = "tcp"
       cidr_ipv4 = "0.0.0.0/0"
     }
-    "allow_postgresql" = {
-      from_port   = 5432
-      to_port     = 5432
-      ip_protocol = "tcp"
-      cidr_ipv4 = "0.0.0.0/0"
-    }
-    "allow_redis" = {
-      from_port   = 6379
-      to_port     = 6379
-      ip_protocol = "tcp"
-      cidr_ipv4 = "0.0.0.0/0"
-    }
   }
 }

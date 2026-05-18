@@ -67,22 +67,18 @@ terraform apply
 
 After apply, two outputs are available:
 
-**Add instances to known_hosts:**
+**add_ssh_known_hosts**
 
-```bash
-eval "$(terraform output -raw add_ssh_known_hosts)"
-```
+This output contains the command to add the instance IPs to your `~/.ssh/known_hosts` file, which is necessary for SSH to work without warnings.
 
-**Get instance IPs for Ansible inventory:**
+**fill_ansible_inventory**
 
-```bash
-terraform output -json fill_ansible_inventory
-```
+This output contains the list of instance IPs to fill your Ansible inventory file.
 
 **SSH into an instance:**
 
 ```bash
-ssh admin@<instance-ip> -i ~/.ssh/id_ed25519
+ssh admin@<instance-ip>
 ```
 
 ## Destroy
