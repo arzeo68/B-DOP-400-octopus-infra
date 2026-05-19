@@ -3,17 +3,17 @@ provider "aws" {
 
   default_tags {
     tags = {
-        "project": local.project_name,
-        "organization": local.organization_name
+      "project" : local.project_name,
+      "organization" : local.organization_name
     }
   }
 }
 
 locals {
-  vpc_cidr =  "10.16.0.0/16"
-  project_name = "octopus"
+  vpc_cidr          = "10.16.0.0/16"
+  project_name      = "octopus"
   organization_name = "epitech"
-  instance_count = 5
+  instance_count    = 5
 }
 
 data "aws_availability_zones" "available" {
@@ -59,27 +59,27 @@ module "ec2_instance" {
 
   name = "${local.project_name}-instance-${count.index + 1}"
 
-  instance_type = "t3.micro"
+  instance_type               = "t3.micro"
   associate_public_ip_address = true
-  ami           = "ami-0e8be3ef4b6a1f0fd" // debian 13
+  ami                         = "ami-0e8be3ef4b6a1f0fd" // debian 13
 
-  key_name      = aws_key_pair.deployer.id
+  key_name = aws_key_pair.deployer.id
 
-  monitoring    = false
-  subnet_id     = element(module.vpc.public_subnets, count.index % length(module.vpc.public_subnets))
+  monitoring = false
+  subnet_id  = element(module.vpc.public_subnets, count.index % length(module.vpc.public_subnets))
 
   security_group_ingress_rules = {
     "allow_ssh" = {
       from_port   = 22
       to_port     = 22
       ip_protocol = "tcp"
-      cidr_ipv4 = "0.0.0.0/0"
+      cidr_ipv4   = "0.0.0.0/0"
     },
     "allow_http" = {
       from_port   = 80
       to_port     = 80
       ip_protocol = "tcp"
-      cidr_ipv4 = "0.0.0.0/0"
+      cidr_ipv4   = "0.0.0.0/0"
     }
   }
 }

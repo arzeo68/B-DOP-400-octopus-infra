@@ -67,9 +67,14 @@ terraform apply
 
 After apply, two outputs are available:
 
-**add_ssh_known_hosts**
+**to ignore ss host checking**
 
-This output contains the command to add the instance IPs to your `~/.ssh/known_hosts` file, which is necessary for SSH to work without warnings.
+Add this yo your .ansible.cfg
+
+```ini
+[defaults]
+host_key_checking = False
+```
 
 **fill_ansible_inventory**
 
